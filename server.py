@@ -1,3 +1,5 @@
+# to run...
+# python server.py --dir public
 import os
 import argparse
 from http.server import HTTPServer, SimpleHTTPRequestHandler
