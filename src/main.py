@@ -1,4 +1,4 @@
-from markdown import (extract_title, generate_page)
+from markdown import (extract_title, generate_page, generate_pages_recursive)
 
 import os
 import sys
@@ -27,7 +27,7 @@ def copyDir(src, dest):         #str, str
 def main(src, temp, dest):
     # copyDir(src, dest)
     copyDir("static", "public")
-    generate_page(src, temp, dest)
+    generate_pages_recursive(src, temp, dest)
 
 if __name__ == "__main__":
     if len(sys.argv) == 4:
@@ -35,4 +35,4 @@ if __name__ == "__main__":
     else:
         # main("static", "public")        #hard coded
         # print("This program copies all the contents of a directory. It requires two arguments: \n\t1) Source directory\n\t2) Destination directory")
-        main("content/index.md", "template.html", "public/index.html")        #hard coded
+        main("content", "template.html", "public")        #hard coded

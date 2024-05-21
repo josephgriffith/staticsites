@@ -1,5 +1,6 @@
 import os
 import re
+from pathlib import Path
 from htmlnode import ParentNode, LeafNode
 from textnode import TextNode, tt_text, tt_bold, tt_italic, tt_code, tt_link, tt_image, text_nodes_to_html_nodes
 
@@ -215,4 +216,12 @@ def generate_page(from_path, template_path, dest_path):
     with open(dest_path, "w") as f:
         f.write(html)
 
-    
+def generate_pages_recursive(content, template, dest):
+    p = Path(content).glob('**/*')
+    files = [x for x in p if x.is_file() and x.suffix == ".md"]
+    for f in files:
+        # print(str(f))                                           # content/index.md, content/majesty/index.md
+        # print(str(f.name))                                      # index.md, index.md
+        # print(f.relative_to(content))                           # index.md, majesty/index.md
+        # print(f.relative_to(content).with_suffix(".html"))      # index.html, majesty/index.html
+        generate_page(str(f), template, str(Path(dest) / f.relative_to(content).with_suffix(".html")))
