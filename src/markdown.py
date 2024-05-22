@@ -27,24 +27,7 @@ def extract_markdown_images(text):
     return re.findall(r"!\[(.*?)\]\((.*?)\)", text)
 def extract_markdown_links(text):
     return re.findall(r"\[(.*?)\]\((.*?)\)", text)
-# def split_nodes_delimiter(old, delimiter, tt=None):
-#     out = []
-#     for n in old:
-#         if not (delimiter in mdChars):      # ` or * or **
-#             out.append(n)
-#         else:
-#             parsed = n.text.split(delimiter)
-#             if len(parsed)%2 == 0:
-#                 raise ValueError("Invalid markdown syntax")
-#             for i in range(len(parsed)):
-#                 if len(parsed[i]) == 0:
-#                     continue
-#                 if i%2 == 0:
-#                     out.append(TextNode(parsed[i], tt_text))
-#                 else:
-#                     out.append(TextNode(parsed[i], mdChars[delimiter]))
-#     return out
-# takes tt_text TextNodes with bold, italic, or code markdown and a delimiter and returns a list of TNs with appropriate text types
+
 def split_nodes_delimiter(old_nodes, delimiter, text_type=None):
     new_nodes = []
     for old_node in old_nodes:
@@ -64,6 +47,7 @@ def split_nodes_delimiter(old_nodes, delimiter, text_type=None):
                 split_nodes.append(TextNode(sections[i], mdChars[delimiter]))
         new_nodes.extend(split_nodes)
     return new_nodes
+
 #parses tt_text TNs into tt_text and tt_image TNs
 def split_nodes_image(old):
     out = []
@@ -82,6 +66,7 @@ def split_nodes_image(old):
             if remaining:                                               
                 out.append(TextNode(remaining, tt_text))                #add any trailing TN text
     return out
+
 #parses tt_text TNs into tt_text and tt_link TNs
 def split_nodes_link(old):
     out = []
@@ -100,6 +85,7 @@ def split_nodes_link(old):
             if remaining:                                               
                 out.append(TextNode(remaining, tt_text))                
     return out
+
 # keeps correct order because all functions build a new list and maintain order
 # takes raw inline markdown text and returns a list of TextNodes of appropriate text types
 def text_to_textnodes(text):
@@ -190,12 +176,7 @@ def markdown_to_html_node(markdown):
             children.append(ordered_to_htmlnode(b))
         else:   # type == bt_paragraph:
             children.append(paragraph_to_htmlnode(b))
-    return ParentNode("div", children)                  # create a div htmlnode tree root
-    # convert blocks to html - 
-        # root div parent node
-            # children blocks are parent nodes 
-                # with leaf nodes for block content and inline markdown children
-            
+    return ParentNode("div", children)                  # create a div htmlnode tree root            
                 
 def extract_title(markdown):
     lines = markdown.split("\n")

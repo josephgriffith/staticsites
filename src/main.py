@@ -25,7 +25,6 @@ def copyDir(src, dest):         #str, str
         print('Source path does not exist: '+src)
 
 def main(src, temp, dest):
-    # copyDir(src, dest)
     copyDir("static", "public")
     generate_pages_recursive(src, temp, dest)
 
@@ -33,6 +32,8 @@ if __name__ == "__main__":
     if len(sys.argv) == 4:
         main(sys.argv[1], sys.argv[2], sys.argv[3])
     else:
-        # main("static", "public")        #hard coded
-        # print("This program copies all the contents of a directory. It requires two arguments: \n\t1) Source directory\n\t2) Destination directory")
+        print("""This program replaces all the contents of a relative 'public' directory with 
+    those of a 'static' directory. Then it recursively generates .html files to 
+    'public' with relative paths for every .md file found in a 'content' directory. 
+              \nIt can optionally take three arguments specifying alternate\n    1) Content directory\n    2) Template file\n    3) Public directory\n""")
         main("content", "template.html", "public")        #hard coded

@@ -1,9 +1,7 @@
 import unittest
-# if 'unittest.util' in __import__('sys').modules:
-    # Show full diff in self.assertEqual.
 __import__('sys').modules['unittest.util']._MAX_LENGTH = 999999999
 
-from markdown import (extract_markdown_images, extract_markdown_links, markdown_to_blocks, get_blocktype,  # type: ignore - fixes warning on markdown import ?_?
+from markdown import (extract_markdown_images, extract_markdown_links, markdown_to_blocks, get_blocktype,  # type: ignore - removes warning on markdown import
                         bt_paragraph, bt_heading, bt_code, bt_quote, bt_unordered_list, bt_ordered_list, mdChars, 
                         split_nodes_delimiter, split_nodes_image, split_nodes_link, text_to_textnodes,
                         heading_to_htmlnode, code_to_htmlnode, quote_to_htmlnode, unordered_to_htmlnode, ordered_to_htmlnode, paragraph_to_htmlnode, markdown_to_html_node)

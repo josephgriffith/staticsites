@@ -4,7 +4,7 @@ class HTMLNode:
         self.tag = tag
         self.value = value
         self.children = children
-        # A dictionary of key-value pairs representing the attributes of the HTML tag. 
+        # props - A dictionary of key-value pairs representing the attributes of the HTML tag. 
         # For example, a link (<a> tag) might have {"href": "https://www.google.com"}
         self.props = props                  
         self.summary = self.get_summary()
